@@ -2,7 +2,7 @@ set :application, "refuge"
 set :repository,  "git@github.com:la-cordee/refuge_2.git"
 set :keep_releases, 2
 set :deploy_to, "/home/refuge"
-set :use_sudo, false
+set :use_sudo, true
 set :user, "refuge"
 set :scm, 'git'
 set :default_stage, 'production'
