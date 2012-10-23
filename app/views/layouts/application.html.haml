@@ -18,7 +18,6 @@
   = csrf_meta_tags
 
 %body
-  #sky_bg
   #top_bar
     = render :partial=>'shared/top_bar'
 
@@ -32,17 +31,17 @@
   #footer
     %p
       = t('handcrafted_with_love')
-      %a{:href=>'http://www.guillaume-barillot.com', :target=>'blank'}
+      %a{:href=>'http://www.guillaume-barillot.com', :target=>'_blank'}
         = t('guillaume_barillot')
       = t('using')
-      %a{:href=>'http://rubyonrails.org', :target=>'blank'}
+      %a{:href=>'http://rubyonrails.org', :target=>'_blank'}
         = t('ror')
       = t('and')
-      %a{:href=>'http://twitter.github.com/bootstrap', :target=>'blank'}
+      %a{:href=>'http://twitter.github.com/bootstrap', :target=>'_blank'}
         = t('twitter_bootstrap')
       = '|'
       = t('cmon')
-      %a{:href=>'https://github.com/la-cordee/refuge', :target=>'blank'}
+      %a{:href=>'https://github.com/la-cordee/refuge', :target=>'_blank'}
         = t('fork_me')
 
   .clear.footer_spacer
@@ -51,8 +50,7 @@
 - if flash[:error] && !flash[:error].strip.blank?
   .modal#error_modal
     .modal-header
-      %a.close{:data=>{'dismiss'=>'modal'}}
-        = '×'
+      %a.close{:data=>{'dismiss'=>'modal'}}= '×'
       %h3= t('warnings.error')
 
     .modal-body

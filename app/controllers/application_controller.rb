@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
 
   # Load global conf
   def load_conf
-    $conf = Conf.find(1)
+    #$conf = Conf.find(1)
+    #raise $conf.inspect
   end
 
   # 404 on record not found
