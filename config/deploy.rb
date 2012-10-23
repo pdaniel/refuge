@@ -8,10 +8,11 @@ set :scm, 'git'
 set :default_stage, 'production'
 set :branch, fetch(:branch, "master")
 set :normalize_asset_timestamps, false
+set :ssh_options, {:forward_agent => true}
 
 role :web, "ns382592.ovh.net"
 role :app, "ns382592.ovh.net"
-role :db,  "ns382592.ovh.net", :primary => true
+role :db,  "ns382592.ovh.net", :primary => true 
 default_environment["PATH"] = "$PATH:/opt/ree/bin/"
 
 namespace :deploy do
