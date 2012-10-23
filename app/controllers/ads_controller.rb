@@ -3,8 +3,8 @@ class AdsController < ApplicationController
   before_filter :is_logged, :load_conf
 
   # GET /ads
-  # Show all ads                                                 HTML
-  # -----------------------------------------------------------------
+  # Show all ads                                           HTML
+  # -----------------------------------------------------------
   def index
     @categories = Category.all
     @ads = Ad.published
@@ -28,13 +28,11 @@ class AdsController < ApplicationController
   end
 
   # DELETE /ads/:id
-  # Deselete an ad                                     REDIRECT
+  # Delete an ad                                       REDIRECT
   # -----------------------------------------------------------
   def destroy
 
-    Ad.find(params[:id]).update_attributes(
-      :end_at => Time.now - 1.day
-    )
+    Ad.find(params[:id]).update_attributes(:end_at => Time.now - 1.day)
 
     redirect_to  ads_path
   end

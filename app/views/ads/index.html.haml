@@ -1,5 +1,9 @@
 .span11#dashboard
+   
   .left#ads
+    = render :partial => '/widgets/birthdays'
+    = render :partial => '/widgets/headline'
+    
     #categories
       %ul
         %li
@@ -41,6 +45,7 @@
 - # hidden
 - unless @categories.empty?
   %input{:type=>'hidden', :id=>'default_category_id', :value=>(@categories.first.id if @categories)}
+  
 - unless @surveys.empty?
   %input{:type=>'hidden', :id=>'current_survey_id', :value=>(@surveys.first.id if @surveys)}
 

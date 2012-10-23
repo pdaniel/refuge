@@ -2,7 +2,7 @@ Refuge::Application.routes.draw do
 
   devise_for :users
 
-  root :to=> "blog#index"
+  root :to=> "ads#index"
 
   match 'members/search' => 'members#search', :via => :post
   match 'members/mail' => 'members#mail_member', :via => :post
@@ -14,7 +14,9 @@ Refuge::Application.routes.draw do
   resources :surveys,  :only => [:create]
   resources :comments, :only => [:destroy]
   resources :ads,      :only => [:index, :create, :destroy]
-  resources :members
+  resources :members do
+    post 'view_as_user'
+  end
   resources :pages
   resources :dashboard
   resources :events,   :only => [:index, :create]
@@ -31,6 +33,7 @@ Refuge::Application.routes.draw do
     resources :conf,            :only => [:index, :create]
     resources :headlines,       :only => [:index, :create]
     resources :stats,           :only => [:index]
+    resources :menus,           :only => [:index, :create]
     resources :locations,       :only => [:index, :create, :update, :destroy]
     resources :blog_categories, :only => [:index, :create, :update, :destroy]
     resources :ads,             :only => [:index, :create, :update, :destroy]

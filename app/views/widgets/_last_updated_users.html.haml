@@ -1,0 +1,6 @@
+.last_updated_users
+  %h2.ribbon= t(direction)
+
+  - users.each do |user|
+    = link_to avatar(user.member, '50x50'), member_path(user.member.id)
+

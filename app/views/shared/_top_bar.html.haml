@@ -5,33 +5,33 @@
   .profil_link
     %ul.level-1.dropdown
       %li
-        = link_to truncate(current_user.member.first_name, :length => 20), member_path(current_user.member.id)
+        = link_to "#{hello} #{truncate(current_user.member.first_name, :length => 20)}", member_path(current_user.member.id)
         %ul.level-2
           - if current_user.role == 'admin'
-            %li{:data => {:do => 'switch_view_as_user', :value => 'true'}}
-              %input{:type => 'radio', :name => 'view_as_admin', :checked => is_admin}
+            %li{:data => {:do => 'toggle', :action => 'view_as_user'}}
+              %input{:type => 'radio', :checked => !current_user.view_as_user}
               %a{:href=>'#'}= t('view_as_admin')
 
-            %li{:data => {:do => 'switch_view_as_user', :value => 'false'}}
-              %input{:type => 'radio', :name => 'view_as_admin', :checked => !is_admin}
+            %li{:data => {:do => 'toggle', :action => 'view_as_user'}}
+              %input{:type => 'radio', :checked => current_user.view_as_user}
               %a{:href=>'#'}= t('view_as_user')
 
           %li
-            %a{:href => '/users/sign_out', :data => {'method' => 'delete'}}
-              %i{:class=>'icon-remove icon-white'}
+            %a{:href => destroy_user_session_path, :data => {'method' => 'delete'}}
+              %i.icon-remove.icon-white
               = t('logout')
 
 
   %ul.main_menu
-    - tabs.each do |tab|
-      %li{:class => ('active' if params[:controller] == tab[:controller])}
-        %a{:href => "/#{tab[:url]}"}
-          %i{:class => tab[:icon]}
-          = t(tab[:name])
+    - Menu.published.order('position ASC').each do |item|
+      %li{:class => ('active' if params[:controller] == item.controller)}
+        %a{:href => "/#{item.controller}"}
+          %i{:class => item.icon}
+          = item.name
 
     - if is_admin
       %li
-        %a{:href => '/admin/surveys'}
-          %i{:class => 'icon-ban-circle icon-white'}
+        %a{:href => admin_surveys_path}
+          %i.icon-ban-circle.icon-white
           = t('admin.admin_panel')
 

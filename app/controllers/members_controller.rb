@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
 
-  before_filter :is_logged, :load_conf
+  before_filter :is_logged
 
   # GET /members
   # List all members                                    HTML
@@ -40,7 +40,7 @@ class MembersController < ApplicationController
   # Create a new user                               REDIRECT
   # --------------------------------------------------------
   def create
-
+    
     new_user = User.create(params[:user])
 
     if new_user.id
@@ -62,7 +62,7 @@ class MembersController < ApplicationController
   # Update a member                                 REDIRECT
   # --------------------------------------------------------
   def update
-    raise params[:view_as_user].inspect
+    raise 'here'
     params[:member][:logo] = nil if params[:logo_reset] == 'true'
 
     @member = Member.find(params[:id])
@@ -102,7 +102,7 @@ class MembersController < ApplicationController
   def mail_member
 
     @from = Member.find(current_user.member.id)
-    @to = Member.find(params[:recipient_id])
+    @to   = Member.find(params[:recipient_id])
 
     Notifier.mail_message({
       :reply_addr => @from.user.email,
@@ -113,6 +113,17 @@ class MembersController < ApplicationController
     }).deliver
 
     redirect_to params[:origin]
+  end
+  
+  def view_as_user
+    if current_user.role == 'admin'
+      user = User.find(current_user.id)
+      user.toggle!(:view_as_user)
+    
+      render :text => 'toggled'
+    else
+      render :text => 'error'
+    end
   end
 end
 

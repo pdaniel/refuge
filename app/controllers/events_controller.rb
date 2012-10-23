@@ -16,7 +16,7 @@ class EventsController < ApplicationController
     @calendar = Calendar.find(params[:calendar_id])
 
     Notifier.event_registration({
-      :to   => @calendar.email,
+      :to           => @calendar.email,
       :current_user => current_user,
       :body => {
         :event_name => params[:event_name],

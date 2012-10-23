@@ -5,32 +5,6 @@ module ApplicationHelper
     Time.now.hour > 18 ? t(:good_evening) : t(:good_morning)
   end
 
-  # Top main menu tabs, remove/add you own here
-  def tabs
-    tabs = [
-      {:name   => 'dashboard',
-       :icon   => 'icon-home icon-white',
-       :url    => 'blog'
-      },
-      {:name   => 'members',
-       :icon   => 'icon-search icon-white',
-       :url    => 'members'
-      },
-      {:name   => 'events',
-       :icon   => 'icon-time icon-white',
-       :url    => 'events'
-      },
-      {:name   => 'lets_share',
-       :icon   => 'icon-random icon-white',
-       :url    => 'ads'
-      },
-      {:name   => 'medias.title',
-       :icon   => 'icon-book icon-white',
-       :url    => 'medias'
-      }
-    ]
-  end
-
   # Which role are you playing ?
   def is_admin
     (current_user.role == 'admin' && !current_user.view_as_user) ? true : false
