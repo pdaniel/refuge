@@ -2,16 +2,16 @@ set :application, "refuge"
 set :repository,  "git@github.com:la-cordee/refuge_2.git"
 set :keep_releases, 2
 set :deploy_to, "/home/refuge"
-set :use_sudo, true
+set :use_sudo, false
 set :user, "refuge"
 set :scm, 'git'
 set :default_stage, 'production'
 set :branch, fetch(:branch, "master")
 set :normalize_asset_timestamps, false
 
-role :web, "refuge.la-cordee.net"
-role :app, "refuge.la-cordee.net"
-role :db,  "refuge.la-cordee.net", :primary => true
+role :web, "ns382592.ovh.net"
+role :app, "ns382592.ovh.net"
+role :db,  "ns382592.ovh.net", :primary => true
 default_environment["PATH"] = "$PATH:/opt/ree/bin/"
 
 namespace :deploy do
