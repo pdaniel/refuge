@@ -2,6 +2,7 @@ $ ->
   # Tooltip init
   $("a[rel='tooltip']").tooltip()
 
+  # Globaly turn 'http://...' strings to links
   jQuery('body').linkify()
 
   # Validation error messaging init
@@ -34,4 +35,10 @@ $ ->
       $('.logo').empty()
       $('#logo_reset').val('true')
     return false
+
+  $('li[data-do="switch_view_as_user"]').click ->
+    if $(this).data('value') == true
+      post_to_url('/members/1', {'user[view_as_user]':'true'}, 'put')
+    else
+      alert 'false'
 

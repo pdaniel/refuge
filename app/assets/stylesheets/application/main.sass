@@ -54,6 +54,11 @@ table th
     background: none
     padding: 0
     width: 960px
+  a, span
+    color: #cfcfcf
+  a:hover
+    color: #fff
+    text-decoration: none
 
 #main.container
   background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(white))
@@ -96,14 +101,7 @@ table th
   &:hover
     background: url(asset-path('cross.png',image)) left no-repeat
 
-#top_bar
-  a, span
-    color: #cfcfcf
-  a:hover
-    color: #fff
-    text-decoration: none
-
-#avatar
+.avatar
   float: left
   width: 43px
   height: 32px
@@ -112,17 +110,54 @@ table th
   overflow: hidden
   margin-top: 2px
 
-#profil_link
+ul.dropdown
+  list-style-type: none
+  margin: 0
+  &.level-1
+    li
+      margin-bottom: 5px
+
+      &:hover ul.level-2 li
+        visibility: visible
+        height: 20px
+
+      .level-2
+        width: 140px
+        padding: 0
+        height: 0
+        margin: 10px auto auto -10px
+        li
+          visibility: hidden
+          padding: 5px 10px
+          margin: 0
+          list-style-type: none
+          background: url(asset-path('alpha_bg_60.png', image))
+          -moz-transition: all 0.5s ease-out
+          -o-transition: all 0.5s ease-out
+          -ms-transition: all 0.5s ease-out
+          -webkit-transition: all 0.5s ease-out
+          transition: all 0.5s ease-out
+          height: 0
+          input
+            margin: auto 5px 2px auto
+
+.profil_link
   margin: 10px auto auto 10px
   float: left
+  width: 150px
+  position: relative
   a
     text-decoration: none
 
-ul#main_menu
+ul.main_menu
+  padding: 0
   float: right
+  width: 720px
+  height: 40px
+  overflow: hidden
   li
-    float: left
-    margin-left: 10px
+    float: right
+    margin-left: 0px
     list-style-type: none
     a
       display: block

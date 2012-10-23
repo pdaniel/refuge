@@ -40,6 +40,8 @@ fr:
     city: "Ville"
   the: "Le"
   by: "par"
+  view_as_admin: "Administrateur"
+  view_as_user: "Membre"
   active_members: "Membres actifs"
   inactive_members: "Anciens"
   all_members: "Tous"
