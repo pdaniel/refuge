@@ -1,9 +1,9 @@
-set :application, "serre"
-set :repository,  "git@github.com:graines-de-sol/serre.git"
+set :application, "refuge"
+set :repository,  "git@github.com:la-cordee/refuge_2.git"
 set :keep_releases, 2
-set :deploy_to, "/home/serre"
+set :deploy_to, "/home/refuge"
 set :use_sudo, false
-set :user, "serre"
+set :user, "refuge"
 set :scm, 'git'
 set :default_stage, 'production'
 set :branch, fetch(:branch, "master")
