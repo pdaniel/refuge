@@ -62,7 +62,6 @@ class MembersController < ApplicationController
   # Update a member                                 REDIRECT
   # --------------------------------------------------------
   def update
-    raise 'here'
     params[:member][:logo] = nil if params[:logo_reset] == 'true'
 
     @member = Member.find(params[:id])
