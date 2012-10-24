@@ -33,7 +33,7 @@ namespace :deploy do
 
   task :precompile_assets do
     run "cd #{release_path}; export PATH=/opt/ree/bin:$PATH"
-    run "cd #{release_path}; bundle install"
+    run "cd #{release_path}; bundle install --without test --without development"
     run "cd #{release_path}; rake assets:precompile RAILS_ENV=production"
   end
 
