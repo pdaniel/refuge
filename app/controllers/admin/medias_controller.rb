@@ -12,7 +12,7 @@ class Admin::MediasController < ApplicationController
   end
 
   # POST /admin/medias/update
-  # Update all cateogries' attributes                  REDIRECT
+  # Update all categories' attributes                  REDIRECT
   # -----------------------------------------------------------
   def update
     MediaCategory.update(params[:category].keys, params[:category].values)
@@ -30,7 +30,7 @@ class Admin::MediasController < ApplicationController
   end
 
   # POST /admin/medias/:id/upload
-  # Update all cateogries' attributes                  REDIRECT
+  # Update all categories' attributes                  REDIRECT
   # -----------------------------------------------------------
   def upload_media
     params[:media][:media_category_id] = params[:id]
@@ -40,7 +40,7 @@ class Admin::MediasController < ApplicationController
   end
 
   # DELETE /admin/medias/media/:id
-  # Update all cateogries' attributes                  REDIRECT
+  # Update all categories' attributes                  REDIRECT
   # -----------------------------------------------------------
   def delete_media
     media_category = Media.find(params[:id]).media_category_id
