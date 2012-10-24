@@ -20,7 +20,7 @@ namespace :deploy do
   task :stop do ; end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+    run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
   task :symlink_shared do
@@ -32,7 +32,9 @@ namespace :deploy do
   end
 
   task :precompile_assets do
-    run "cd #{release_path}; rake assets:precompile RAILS_ENV=production "
+    run "cd #{release_path}; export PATH=/opt/ree/bin:$PATH"
+    run "cd #{release_path}; bundle install"
+    run "cd #{release_path}; rake assets:precompile RAILS_ENV=production"
   end
 
 end
