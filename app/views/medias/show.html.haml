@@ -9,8 +9,9 @@
       %a{:href => admin_medias_path}= t('manage_medias_categories')
 
 .span8.right
-  .well
-    %p= simple_format(@category.description)
+  - if @category.description != ''
+    .well
+      %p= simple_format(@category.description)
   %br
   - if is_admin
     .well{:style => 'height:130px;overflow: hidden'}
