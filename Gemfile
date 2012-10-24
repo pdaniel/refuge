@@ -30,18 +30,18 @@ gem 'acts_as_tree_rails3'
 gem 'birthday', '~> 0.2.0'
 gem 'multi_json'
 
-group :development, :test do
-  # Pretty printed test output
-  gem 'turn', :require => false
-  gem 'rspec-rails'
-  gem 'capybara'
-  gem 'shoulda-matchers'
-  gem 'simplecov', :require => false
-  gem 'timecop'
-  gem 'selenium-webdriver'
-  gem 'launchy'
-  gem 'warden'
-  gem 'factory_girl_rails'
-  gem 'database_cleaner'
-end
+#group :development, :test do
+#  # Pretty printed test output
+#  gem 'turn', :require => false
+#  gem 'rspec-rails'
+#  gem 'capybara'
+#  gem 'shoulda-matchers'
+#  gem 'simplecov', :require => false
+#  gem 'timecop'
+#  gem 'selenium-webdriver'
+#  gem 'launchy'
+#  gem 'warden'
+#  gem 'factory_girl_rails'
+#  gem 'database_cleaner'
+#end
 
