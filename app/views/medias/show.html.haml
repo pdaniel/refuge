@@ -9,7 +9,7 @@
       %a{:href => admin_medias_path}= t('manage_medias_categories')
 
 .span8.right
-  - if @category.description != ''
+  - unless @category.description.blank?
     .well
       %p= simple_format(@category.description)
   %br
