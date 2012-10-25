@@ -44,9 +44,15 @@
         right: 'month,basicWeek,basicDay'
       },
       defaultView: 'month',
-      timeFormat: '(HH:ii)',
+      timeFormat: '(HH:mm)',
       eventColor: '#378006',
       firstDay: 1,
+      buttonText: { 
+        today: "#{I18n.t('calendar.today')}", 
+        month: "#{I18n.t('calendar.month')}",
+        week: "#{I18n.t('calendar.week')}",
+        day: "#{I18n.t('calendar.day')}"
+      },
 
       eventClick: function(calEvent, jsEvent, view) {
 
