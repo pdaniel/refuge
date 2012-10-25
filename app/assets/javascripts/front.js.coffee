@@ -45,3 +45,10 @@ $ ->
           location.reload()
         else
           alert 'an error as occured'
+
+# 00 padding for dates/times
+window.pad2 = (number) ->
+  if number < 10 
+    '0' + number
+  else
+    '' + number

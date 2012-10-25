@@ -6,3 +6,6 @@ tmp/
 .sass-cache/
 .rvmrc
 coverage
+/nbproject/private/
+/.redcar/
+/.idea/

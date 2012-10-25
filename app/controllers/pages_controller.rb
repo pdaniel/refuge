@@ -3,16 +3,19 @@ class PagesController < ApplicationController
   before_filter :is_logged
   before_filter :load_conf
 
+  # GET /pages
+  # Redirect ot first existent page                          REDIRECT
+  # -----------------------------------------------------------------
+  def index
+    # CRAPPY !!!!!! TODO : improve pages/menus managment to allow multiple "pages" layout 
+    redirect_to page_path('meetings')
+  end
+  
   # GET /pages/:id
   # Show pages in given category                                 HTML
   # -----------------------------------------------------------------
   def show
-    @articles = Article.where(['
-      (location_id = ?
-      OR location_id = 0)
-      AND category = ?
-      ', current_user.member.location_id, params[:id]
-    ]).order('created_at DESC')
+    @articles = Article.get_page_articles(current_user.member.location_id, params[:id])
 
     @locations = Location.all
   end

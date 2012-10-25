@@ -22,7 +22,7 @@ class MembersController < ApplicationController
   # Show member's profile                               HTML
   # --------------------------------------------------------
   def show
-    @member = Member.find(params[:id], :include=>:profiles)
+    @member = Member.active.find(params[:id], :include=>:profiles)
 
     @user_profiles = @member.profiles.map{|p|{p.network_id=>p.url}}
     @pro_networks = Network.with_urls(@user_profiles, :pro)

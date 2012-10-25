@@ -18,7 +18,7 @@ class AdsController < ApplicationController
     params[:ad][:member_id] = current_user.member.id
 
     if params[:ad_id].strip.blank?
-      new_ad = Ad.create(params[:ad])
+      Ad.create(params[:ad])
     else
       ad = Ad.find(params[:ad_id])
       ad.update_attributes(params[:ad])

@@ -44,16 +44,17 @@
         right: 'month,basicWeek,basicDay'
       },
       defaultView: 'month',
-      timeFormat: '(HH:mm)',
+      timeFormat: '(HH:ii)',
       eventColor: '#378006',
+      firstDay: 1,
 
       eventClick: function(calEvent, jsEvent, view) {
 
         months = #{fullmonth_names_start_1};
         start_date = new Date(calEvent.start);
         formated_date = start_date.getDate() +' '+ months[start_date.getMonth()] +' '+ start_date.getFullYear();
-        formated_hour = start_date.getHours() +':'+ start_date.getMinutes();
-
+        formated_hour = pad2(start_date.getHours()) +':'+ pad2(start_date.getMinutes());
+        
         $('#toggle_event #event_details').empty();
         $('#toggle_event #event_details').append(formated_date +', '+ formated_hour);
 
