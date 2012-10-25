@@ -9,8 +9,8 @@ class Admin::SurveysController < ApplicationController
     @survey = Survey.where(['location_id = ? AND parent_id = 0', $conf.default_location_id]).order('created_at DESC').first
   end
 
-  # GET /admin/show/:id
-  # Show surveys results                                  AJAX
+  # GET /admin/survey/:id/show_results
+  # Show 'who has voted what'                             AJAX
   # ----------------------------------------------------------
   def show
     @survey = Survey.find(params[:id])

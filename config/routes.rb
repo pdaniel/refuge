@@ -46,7 +46,7 @@ Refuge::Application.routes.draw do
       end
     end
 
-    resources :surveys,    :only => [:index, :create, :update, :destroy] do
+    resources :surveys,    :only => [:index, :create, :update, :destroy, :show] do
       member do
         post   :create_answer
         delete :delete_answer

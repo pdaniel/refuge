@@ -68,13 +68,31 @@ module ApplicationHelper
   def thumbnail_tag(image, size, options={})
 
     image ? this_image = image : this_image = $conf.default_avatar
-    options[:alt].blank? ? image_name = this_image.name : image_name = options[:alt]
 
-    unless File.exists?("#{Rails.root}/public/images/#{size}/#{this_image.name}")
-      this_image.thumb(size).to_file("#{Rails.root}/public/images/#{size}/#{this_image.name}")
-    end    
+    sub_dir    = 'images'
+    root_dir   = File.join(Rails.root, 'public', sub_dir)
+    resource   = File.join(root_dir, size, this_image.name)
 
-    image_tag "/images/#{size}/#{this_image.name}", :alt => image_name
+    unless File.exists?(resource)
+      this_image.thumb(size).to_file(resource)
+    end 
+
+    attrs = ''
+    options.each do |key, value| 
+      if key == :data        
+        value.each do |key, value|
+          attrs << "data-#{key}='#{value}' "
+        end
+      else
+        attrs << "#{key.to_s}='#{value}' "
+      end
+    end
+
+    attrs << "alt='#{this_image.name}'"         if options[:alt].blank? 
+    width  = "width='#{size.split('x')[0]}px'"  unless size.split('x')[0].blank?  
+    height = "height='#{size.split('x')[1]}px'" unless size.split('x')[1].blank? 
+
+    "<img src='/#{sub_dir}/#{size}/#{this_image.name}' #{width} #{height} #{attrs} />".html_safe
   end
 
   # Format gauge width for surveys
@@ -116,6 +134,8 @@ module ApplicationHelper
     months = I18n.t('date.abbr_month_names')[1..-2]
     months.to_json
   end
+
+  # Testing stuff
   extend self
 end
 

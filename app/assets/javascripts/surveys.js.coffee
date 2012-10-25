@@ -17,7 +17,7 @@ $ ->
   $('.doshow_results').click ->
     $('#show_results').modal()
     $.ajax
-      url: '/admin/surveys/show_results/'+$(this).data('id')
+      url: '/admin/surveys/'+$(this).data('id')
       type: 'GET'
       success : (data) ->
         $('.modal-body #results').html data
