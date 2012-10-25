@@ -1,6 +1,6 @@
 class Admin::MenusController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # GET /admin/menus
   # Show available pages                                  HTML

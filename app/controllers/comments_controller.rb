@@ -1,7 +1,5 @@
 class CommentsController < ApplicationController
 
-  before_filter :is_logged, :load_conf
-
   # DELETE /comment/:id
   # Deselete a comment                                 REDIRECT
   # -----------------------------------------------------------

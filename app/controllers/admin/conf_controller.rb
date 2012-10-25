@@ -1,6 +1,6 @@
 class Admin::ConfController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # GET /admin/conf
   # Show global conf params                                HTML

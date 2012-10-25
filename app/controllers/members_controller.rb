@@ -1,7 +1,5 @@
 class MembersController < ApplicationController
 
-  before_filter :is_logged
-
   # GET /members
   # List all members                                    HTML
   # --------------------------------------------------------
@@ -100,7 +98,7 @@ class MembersController < ApplicationController
   # --------------------------------------------------------
   def mail_member
 
-    @from = Member.find(current_user.member.id)
+    @from = Member.find(current_member.id)
     @to   = Member.find(params[:recipient_id])
 
     Notifier.mail_message({

@@ -1,11 +1,17 @@
 class ApplicationController < ActionController::Base
+
   protect_from_forgery
+
+  before_filter :is_logged, :load_conf
 
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
   # Check we're logged
   def is_logged
-    redirect_to '/users/sign_in' unless user_signed_in?
+    # Place here controllers where authentication is not required
+    unsecured = ['devise/sessions', 'devise/passwords', 'iframes/members']
+
+    redirect_to '/users/sign_in' if (!user_signed_in? && !unsecured.include?(params[:controller]))
   end
 
   # Check we're admin
@@ -20,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   # 404 on record not found
   def not_found
-    render(:file => "#{Rails.root}/public/404.html", :layout => false, :status => 404)
+    render :file => "#{Rails.root}/public/404.html", :layout => false, :status => 404
   end
 
 end

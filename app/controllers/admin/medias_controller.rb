@@ -1,6 +1,6 @@
 class Admin::MediasController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # POST /admin/medias/create
   # Create a media category                            REDIRECT

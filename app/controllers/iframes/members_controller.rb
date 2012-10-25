@@ -1,6 +1,5 @@
 class Iframes::MembersController < ApplicationController
 
-  before_filter :load_conf
   layout 'iframe'
 
   # GET /iframes/members

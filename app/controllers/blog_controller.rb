@@ -1,7 +1,5 @@
 class BlogController < ApplicationController
 
-  before_filter :is_logged, :load_conf
-
   # GET /blog
   # Show last recent blog posts                            HTML
   # -----------------------------------------------------------
@@ -39,7 +37,7 @@ class BlogController < ApplicationController
   def update
 
     Comment.create(
-      :member_id => current_user.member.id,
+      :member_id => current_member.id,
       :post_id   => params[:id],
       :content   => params[:comment]
     )

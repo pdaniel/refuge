@@ -1,6 +1,6 @@
 .span12
   .span3
-    = avatar(@member, '180x180')
+    = thumbnail_tag @member.avatar, '180x180', :alt => "#{@member.first_name} #{@member.last_name}"
 
   .span8
     %h1= @member.first_name

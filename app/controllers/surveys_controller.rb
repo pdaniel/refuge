@@ -1,7 +1,5 @@
 class SurveysController < ApplicationController
 
-  before_filter :is_logged, :load_conf
-
   # GET /surveys
   # Show dashboard main root page                                HTML
   # -----------------------------------------------------------------
@@ -17,10 +15,10 @@ class SurveysController < ApplicationController
     @survey = Survey.find(params[:id])
 
     @voters_count = @survey.voters.length
-    @survey.voters.include?(current_user.member.id)? @already_voted = true : @already_voted = false
+    @survey.voters.include?(current_member.id)? @already_voted = true : @already_voted = false
 
     if !@already_voted && params[:vote]
-      Survey.vote(current_user.member.id, params[:vote])
+      Survey.vote(current_member.id, params[:vote])
       @voters_count += 1
     end
 
@@ -37,10 +35,10 @@ class SurveysController < ApplicationController
     @survey = Survey.find(params[:survey_id])
 
     @voters_count = @survey.voters.length
-    @survey.voters.include?(current_user.member.id)? @already_voted = true : @already_voted = false
+    @survey.voters.include?(current_member.id)? @already_voted = true : @already_voted = false
 
     if !@already_voted && params[:vote]
-      Survey.vote(current_user.member.id, params[:vote])
+      Survey.vote(current_member.id, params[:vote])
       @voters_count += 1
     end
 

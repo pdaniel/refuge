@@ -20,7 +20,7 @@
     .member_resume
       .member_avatar
         %a{:href => api_member_path(member.id)}
-          = avatar(member, '100x75')
+          = thumbnail_tag(member.avatar, '100x75', :alt => "#{member.first_name} #{member.last_name}")
 
       %span= link_to member.first_name, api_member_path(member.id)
 

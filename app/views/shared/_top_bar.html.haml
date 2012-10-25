@@ -1,11 +1,11 @@
 .container
   .avatar
-    = avatar(current_user.member, '46x32')
+    = thumbnail_tag current_member.avatar, '46x32', :alt => "#{current_member.first_name} #{current_member.last_name}"
 
   .profil_link
     %ul.level-1.dropdown
       %li
-        = link_to "#{hello} #{truncate(current_user.member.first_name, :length => 20)}", member_path(current_user.member.id)
+        = link_to "#{hello} #{truncate(current_member.first_name, :length => 20)}", member_path(current_member.id)
         %ul.level-2
           - if current_user.role == 'admin'
             %li{:data => {:do => 'toggle', :action => 'view_as_user'}}

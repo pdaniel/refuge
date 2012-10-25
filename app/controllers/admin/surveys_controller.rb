@@ -1,6 +1,6 @@
 class Admin::SurveysController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # GET /admin/surveys
   # Show surveys managment                                HTML

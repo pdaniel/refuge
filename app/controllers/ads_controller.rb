@@ -1,7 +1,5 @@
 class AdsController < ApplicationController
 
-  before_filter :is_logged, :load_conf
-
   # GET /ads
   # Show all ads                                           HTML
   # -----------------------------------------------------------
@@ -15,7 +13,7 @@ class AdsController < ApplicationController
   # -----------------------------------------------------------
   def create
 
-    params[:ad][:member_id] = current_user.member.id
+    params[:ad][:member_id] = current_member.id
 
     if params[:ad_id].strip.blank?
       Ad.create(params[:ad])

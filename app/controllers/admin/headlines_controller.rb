@@ -1,6 +1,6 @@
 class Admin::HeadlinesController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # GET /admin/headlines
   # Show current headline                                  HTML

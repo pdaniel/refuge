@@ -1,7 +1,6 @@
 class Admin::GalleriesController < ApplicationController
 
-  before_filter :is_admin, :load_conf
-
+  before_filter :is_admin
 
   # POST /admin/headlines
   # Update headline                                        HTML

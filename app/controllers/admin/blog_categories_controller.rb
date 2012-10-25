@@ -1,6 +1,6 @@
 class Admin::BlogCategoriesController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # POST /admin/blog_categories/create
   # Create a blog category                             REDIRECT

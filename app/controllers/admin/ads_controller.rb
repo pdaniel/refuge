@@ -1,6 +1,6 @@
 class Admin::AdsController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # POST /admin/ads
   # Create a category                                  REDIRECT

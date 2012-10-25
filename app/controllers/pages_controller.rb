@@ -1,8 +1,5 @@
 class PagesController < ApplicationController
 
-  before_filter :is_logged
-  before_filter :load_conf
-
   # GET /pages
   # Redirect ot first existent page                          REDIRECT
   # -----------------------------------------------------------------
@@ -15,7 +12,7 @@ class PagesController < ApplicationController
   # Show pages in given category                                 HTML
   # -----------------------------------------------------------------
   def show
-    @articles = Article.get_page_articles(current_user.member.location_id, params[:id])
+    @articles = Article.get_page_articles(current_member.location_id, params[:id])
 
     @locations = Location.all
   end

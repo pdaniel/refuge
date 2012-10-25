@@ -1,6 +1,6 @@
 class Admin::LocationsController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # POST /admin/locations/create
   # Create a locations                                 REDIRECT

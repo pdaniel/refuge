@@ -10,6 +10,11 @@ module ApplicationHelper
     (current_user.role == 'admin' && !current_user.view_as_user) ? true : false
   end
 
+  # Just a handy shortcut
+  def current_member
+    current_user.member if current_user
+  end
+
   # Display socials networks links and icon if profile exists
   def show_social_profiles(networks)
     out = ''
@@ -59,13 +64,17 @@ module ApplicationHelper
     end
   end
 
-  # Show member avatar or default avatar
-  def avatar(member, size)
-    if member.avatar
-      image_tag member.avatar.thumb(size).url, :alt=>"#{member.first_name} #{member.last_name}"
-    else
-      image_tag $conf.default_avatar.thumb(size).url, :alt=>t('default_avatar')
-    end
+  # Cache Dragonfly thumbnail generation and produce friendly SEO URLs
+  def thumbnail_tag(image, size, options={})
+
+    image ? this_image = image : this_image = $conf.default_avatar
+    options[:alt].blank? ? image_name = this_image.name : image_name = options[:alt]
+
+    unless File.exists?("#{Rails.root}/public/images/#{size}/#{this_image.name}")
+      this_image.thumb(size).to_file("#{Rails.root}/public/images/#{size}/#{this_image.name}")
+    end    
+
+    image_tag "/images/#{size}/#{this_image.name}", :alt => image_name
   end
 
   # Format gauge width for surveys

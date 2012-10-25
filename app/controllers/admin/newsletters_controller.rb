@@ -1,6 +1,6 @@
 class Admin::NewslettersController < ApplicationController
 
-  before_filter :is_admin, :load_conf
+  before_filter :is_admin
 
   # GET /admin/newsletters
   # Show last newsletter                                   HTML

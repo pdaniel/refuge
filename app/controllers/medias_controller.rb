@@ -1,7 +1,5 @@
 class MediasController < ApplicationController
 
-  before_filter :is_logged, :load_conf
-
   # GET /medias
   # Get first cateogry to look in                          HTML
   # -----------------------------------------------------------

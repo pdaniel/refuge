@@ -1,6 +1,5 @@
 class ImagesController < ApplicationController
 
-  before_filter :is_logged, :load_conf
   layout 'popup'
 
   # GET /images
