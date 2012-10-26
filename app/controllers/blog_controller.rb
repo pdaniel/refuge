@@ -37,7 +37,7 @@ class BlogController < ApplicationController
   def update
 
     Comment.create(
-      :member_id => current_member.id,
+      :member_id => current_user.member.id,
       :post_id   => params[:id],
       :content   => params[:comment]
     )

@@ -31,11 +31,13 @@ describe 'Blog', :js => true do
   end
 
   it "Save a new post" do
-    click_link ('add_new_post')
+    visit '/blog'
+    click_link I18n.t('blog.create_post')
 
     fill_in('post_title', :with => 'new_post_title')
     page.execute_script('tinyMCE.get("post[content]").setContent("new_post_body")')
-    click_button('save_post')
+    
+    click_button I18n.t('blog.save_post')
 
     page.should have_content('New_post_title')
   end
@@ -43,11 +45,12 @@ describe 'Blog', :js => true do
   it "Edit an existing blog post" do
     visit '/blog/1'
 
-    click_link('edit_post')
-
+    click_link I18n.t('blog.edit_this_post')
+    sleep 1
     fill_in('post_title', :with => 'Edited_post_title')
-    page.execute_script('tinyMCE.get("post[content]").setContent("new_post_body")')
-    click_button('save_post')
+    page.execute_script('tinyMCE.get("post[content]").setContent("edited_post_body")')
+    
+    click_button I18n.t('blog.save_post')
 
     page.should have_content('Edited_post_title')
   end
@@ -56,7 +59,7 @@ describe 'Blog', :js => true do
     visit '/blog/1'
 
     fill_in('comment', :with => 'new comment by test member')
-    click_button ('save_comment')
+    click_button I18n.t('save')
 
     page.should have_content('new comment by test member')
   end
@@ -73,14 +76,14 @@ describe 'Blog', :js => true do
   it "Delete the blog post" do
     visit '/blog/1'
 
-    click_link('edit_post')
-
-    page.find('#create_post_modal').find('.delete').click
+    click_link I18n.t('blog.edit_this_post')
+    sleep 1
+    click_link I18n.t('blog.delete_post')
     page.driver.browser.switch_to.alert.accept
 
     visit '/blog'
 
-    page.should_not have_content('Edited_post_title')
+    page.should_not have_content I18n.t('Edited_post_title')
   end
 
 end

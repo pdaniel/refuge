@@ -230,6 +230,8 @@ fr:
     in_category: ", dans la catégorie "
     category: "Catégorie"
     published_at_time: "à "
+    save_post: "Enregistrer ce post"
+    delete_post: "Supprimer ce post"
   medias:
     title: "Bibliothèque"
     choose_file: "Choisissez un fichier"

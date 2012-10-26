@@ -30,9 +30,9 @@
 
       %br
       - if current_user.role == 'admin' && @post
-        %a.left.delete{:href => blog_path(@post.id), :data => {:method => :delete, :confirm => t('confirms.delete_this_post')}}= t('delete')
+        %a.left.delete{:href => blog_path(@post.id), :data => {:method => :delete, :confirm => t('confirms.delete_this_post')}}= t('blog.delete_post')
 
-      = submit_tag t('save'), :class=>'btn  btn-danger right', :id => 'save_post'
+      = submit_tag t('blog.save_post'), :class=>'btn  btn-danger right', :id => 'save_post'
 
 = t_init(:name => 'post[content]')
 

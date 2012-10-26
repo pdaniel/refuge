@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe 'Ads', :js => true do
 
+  before(:all) do
+    FactoryGirl.create :conf
+    FactoryGirl.create :user, :role => 'user'
+  end
+
   before (:each) do
     visit '/users/sign_in'
     fill_in('user_email', :with => 'testing1@example.com')
@@ -16,7 +21,7 @@ describe 'Ads', :js => true do
   it "visit ads home page" do
     visit '/ads'
 
-    page.should have_content(I18n.t('create_ad'))
+    page.should have_content I18n.t('create_ad')
   end
 
 end

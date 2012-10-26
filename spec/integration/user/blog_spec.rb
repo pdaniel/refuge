@@ -29,7 +29,7 @@ describe 'Blog', :js => true do
 
   it "visit blog index" do
     visit '/blog'
-
+    
     page.should have_content('Post number 1')
     page.should have_content('Post number 2')
     page.should have_content('Post number 4')
