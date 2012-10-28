@@ -5,8 +5,6 @@
     %p.label= t('admin.current_locations')
     = form_tag admin_blog_category_path('all'), :method=>:put do
       %table#locations_mgt
-        %tr
-
         - BlogCategory.all.each do |category|
           %tr
             %td

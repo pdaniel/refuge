@@ -1,10 +1,11 @@
 require 'spec_helper'
+include Warden::Test::Helpers
 
 describe 'Blog', :js => true do
 
   before(:all) do
     FactoryGirl.create :conf
-    FactoryGirl.create :user, :role => 'user'
+    @user = FactoryGirl.create :user, :role => 'user'
     (1..3).each do |i|
       FactoryGirl.create :blog_category
     end
@@ -17,10 +18,7 @@ describe 'Blog', :js => true do
   end
 
   before (:each) do
-    visit '/users/sign_in'
-    fill_in('user_email', :with => 'testing1@example.com')
-    fill_in('user_password', :with => 'testing')
-    click_button I18n.t('devise.common.sign_in')
+    login_as @user, :scope => :user    
   end
 
   after(:all) do

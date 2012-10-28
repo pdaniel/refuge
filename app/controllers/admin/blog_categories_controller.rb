@@ -6,7 +6,7 @@ class Admin::BlogCategoriesController < ApplicationController
   # Create a blog category                             REDIRECT
   # -----------------------------------------------------------
   def create
-    BlogCategory.create
+    BlogCategory.create(params[:category])
 
     redirect_to admin_blog_categories_path
   end
