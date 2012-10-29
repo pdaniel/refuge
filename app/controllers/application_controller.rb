@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_member
-    current_user.member
+    current_user.member if current_user
   end
 
   helper_method :current_member
