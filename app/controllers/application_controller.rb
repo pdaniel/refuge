@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  before_filter :is_logged, :load_conf
+  before_filter :is_logged, :load_conf, :current_member
 
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
@@ -28,6 +28,12 @@ class ApplicationController < ActionController::Base
   def not_found
     render :file => "#{Rails.root}/public/404.html", :layout => false, :status => 404
   end
+
+  def current_member
+    current_user.member
+  end
+
+  helper_method :current_member
 
 end
 

@@ -18,7 +18,7 @@ class SurveysController < ApplicationController
     @survey.voters.include?(current_user.member.id)? @already_voted = true : @already_voted = false
 
     if !@already_voted && params[:vote]
-      Survey.vote(current_member.id, params[:vote])
+      Survey.vote(current_user.member.id, params[:vote])
       @voters_count += 1
     end
 
