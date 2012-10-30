@@ -6,7 +6,7 @@ class Iframes::MembersController < ApplicationController
   # List all members                                    HTML
   # --------------------------------------------------------
   def index
-    @members = Member.order('first_name ASC')
+    @members = Member.active.order('first_name ASC')
   end
 
   # POST /iframes/members/search
@@ -22,7 +22,7 @@ class Iframes::MembersController < ApplicationController
   # Show member's profile                               HTML
   # --------------------------------------------------------
   def show
-    @member = Member.where(['members.id = ?', params[:id]]).first
+    @member = Member.active.where(['members.id = ?', params[:id]]).first
 
     raise ActiveRecord::RecordNotFound.new(:not_found) if !@member
 
