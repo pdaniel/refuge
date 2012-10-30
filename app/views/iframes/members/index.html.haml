@@ -15,7 +15,7 @@
     .member_resume
       .member_avatar
         %a{:href => iframes_member_path(member.id)}
-          = thumbnail_tag(member.avatar, '100x75', :alt => "#{member.first_name} #{member.last_name}")
+          = thumbnail_tag(member.avatar, '102x102', :alt => "#{member.first_name} #{member.last_name}")
 
       %span= link_to member.first_name, iframes_member_path(member.id)
 
