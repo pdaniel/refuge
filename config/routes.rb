@@ -52,17 +52,23 @@ Refuge::Application.routes.draw do
         delete :delete_answer
       end
     end
-
   end
 
   namespace :api do
     match 'blog/feed' => 'blog#feed', :as => 'rss_feed'
-
   end
 
   namespace :iframes do
     match 'members/search' => 'members#search', :via => :post, :as => 'members_search'
     resources :members, :only => [:index, :show]
   end
+
+  match 'thumbnails/:model/:id/:method/:style/:name' => Dragonfly[:images].endpoint { |params, app|
+    params[:model]
+    .camelize.constantize
+    .find(params[:id].to_i)
+    .send(params[:method])
+    .thumb(params[:style])
+  }
 end
 

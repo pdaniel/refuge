@@ -21,7 +21,7 @@
         %input{:type=>'hidden', :class=>'end_at', :value=>ad.end_at.strftime('%Y-%m-%d')}
 
         .avatar
-          = link_to thumbnail_tag(ad.member.avatar, '32x32', :alt => "#{ad.member.first_name} #{ad.member.last_name}"), member_path(ad.member.id), :rel=>'tooltip', :title=>"#{ad.member.first_name} #{ad.member.last_name}"
+          = link_to thumbnail_tag(ad.member, 'avatar', '32x32', :alt => "#{ad.member.first_name} #{ad.member.last_name}"), :rel => 'tooltip', :title => "#{ad.member.first_name} #{ad.member.last_name}"
 
         %h3= ad.subject
         %p= hard_clean ad.body

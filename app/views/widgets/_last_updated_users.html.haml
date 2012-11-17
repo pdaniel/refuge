@@ -2,5 +2,5 @@
   %h2.ribbon= t(direction)
 
   - users.each do |user|
-    = link_to thumbnail_tag(user.member.avatar, '50x50', :alt => "#{user.member.first_name} #{user.member.last_name}"), member_path(user.member.id)
+    = link_to thumbnail_tag(user.member, 'avatar', '50x50', :alt => "#{user.member.first_name} #{user.member.last_name}"), member_path(user.member.id)
 

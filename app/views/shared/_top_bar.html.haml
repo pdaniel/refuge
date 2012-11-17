@@ -1,6 +1,6 @@
 .container
   .avatar
-    = thumbnail_tag current_member.avatar, '46x32', :alt => "#{current_member.first_name} #{current_member.last_name}"    
+    = thumbnail_tag current_member, 'avatar', '46x32', :alt => "#{current_member.first_name} #{current_member.last_name}"    
 
   .profil_link
     %ul.level-1.dropdown

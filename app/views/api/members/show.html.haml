@@ -4,7 +4,7 @@
       - if @member.logo
         = (image_tag @member.logo.thumb('x180').url, :alt=>"logo")
       - else
-        = thumbnail_tag(@member.avatar, '180x180', :alt => "#{@member.first_name} #{@member.last_name}")
+        = thumbnail_tag(@member, 'avatar', '180x180', :alt => "#{@member.first_name} #{@member.last_name}")
 
   .span8
     %h1= @member.first_name

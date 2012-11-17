@@ -24,7 +24,7 @@
         .comment
           .left.avatar
             %a{:href=>member_path(comment.member_id)}
-              = thumbnail_tag(comment.member.avatar, '50x50', :alt => "#{comment.member.first_name} #{comment.member.last_name}")
+              = thumbnail_tag(comment.member, 'avatar', '50x50', :alt => "#{comment.member.first_name} #{comment.member.last_name}")
           .left.date
             %strong= "#{t('the')} #{l(comment.created_at, :format => :long)} #{t('by')} #{comment.member.first_name}"
             %p= simple_format comment.content
