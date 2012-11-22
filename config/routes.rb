@@ -64,11 +64,7 @@ Refuge::Application.routes.draw do
   end
 
   match 'thumbnails/:model/:id/:method/:style/:name' => Dragonfly[:images].endpoint { |params, app|
-    params[:model]
-    .camelize.constantize
-    .find(params[:id].to_i)
-    .send(params[:method])
-    .thumb(params[:style])
+    params[:model].camelize.constantize.find(params[:id].to_i).send(params[:method]).thumb(params[:style])
   }
 end
 
