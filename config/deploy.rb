@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "refuge"
 set :repository,  "git@github.com:la-cordee/refuge_2.git"
 set :keep_releases, 2
