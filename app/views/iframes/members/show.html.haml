@@ -14,7 +14,7 @@
 
   - if member_has_infos?(@member)
     .span7.well.details
-      %table
+      %table{:style => 'table-layout:fixed'}
         - if @member.organisation
           %tr
             %td
@@ -28,9 +28,9 @@
 
         - if @member.prestations
           %tr
-            %td
+            %td{:style => 'vertical-align:top'}
               %p= t('prestations')
-            %td
+            %td{:style => 'word-wrap: break-all;'}
               = simple_format @member.prestations
 
       .clear

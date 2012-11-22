@@ -1,5 +1,5 @@
 body
-  background: #fff none !important
+  background: transparent none !important
 
 input#member_presence
   width: 570px
@@ -31,7 +31,9 @@ a
     color: #fff
 
 .member_iframe
-  width: 630px
+  width: 649px
+
+  height: 900px
   overflow: hidden
   .avatar
     width: 180px
@@ -42,3 +44,28 @@ a
 .details
   margin-left: 140px !important
   width: 440px !important
+
+#api_members_list
+  background-color: blue
+  .member_resume
+    width: 73px
+    height: 93px
+    overflow: hidden
+    font-size: 12px
+    .member_avatar
+      width: 63px
+      height: 63px
+      margin: 5px
+      padding: 0px
+      &:hover
+        width: 65px
+        height: 65px
+        margin: 4px  
+
+.member_iframe
+  table
+    tr
+      td
+        p
+          display: block
+          max-width: 450px
