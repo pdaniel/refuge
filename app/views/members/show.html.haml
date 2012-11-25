@@ -24,7 +24,11 @@
             %td
               %p= t('activity_1')
             %td
-              %p= @member.website ? link_to(@member.organisation, @member.website) : @member.organisation
+              - if @member.website
+                - target = @member.website.split('http://')
+              - else
+                - target = []
+              %p= @member.website ? link_to(@member.organisation, "http://#{target.last}", :target => '_blank') : @member.organisation
 
         - if @member.organisation_2
           %tr
