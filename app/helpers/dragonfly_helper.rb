@@ -17,15 +17,17 @@ module DragonflyHelper
       end
     end
 
+    time_stamp = File.new(this_image.path).mtime.to_i
+
     attrs << "alt='#{File.basename(this_image.name, '.*')}'" if options[:alt].blank?     
 
     width, height = ''
     if(size.split('x')[0].to_i.to_s == size.split('x')[0] && size.split('x')[1].to_i.to_s == size.split('x')[1])
-      width  = "width='#{size.split('x')[0].to_i}px' " 
-      height = "height='#{size.split('x')[1].to_i}px'" 
+      width  = "width='#{size.split('x')[0].to_i}' " 
+      height = "height='#{size.split('x')[1].to_i}'" 
     end
 
-    "<img src='/thumbnails/#{model.class.name.downcase}/#{model.id}/#{column}/#{size}/#{this_image.name}' #{width}#{height} #{attrs} />".html_safe
+    "<img src='/thumbnails/#{model.class.name.downcase}/#{model.id}/#{column}/#{size}/#{this_image.name}?#{time_stamp}' #{width}#{height} #{attrs} />".html_safe
   end
 
 end
