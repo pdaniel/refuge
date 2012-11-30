@@ -1,4 +1,5 @@
-#require "bundler/capistrano"
+require "bundler/capistrano"
+
 set :application, "refuge"
 set :repository,  "git@github.com:la-cordee/refuge_2.git"
 set :keep_releases, 2
@@ -14,7 +15,7 @@ set :ssh_options, {:forward_agent => true}
 role :web, "ns382592.ovh.net"
 role :app, "ns382592.ovh.net"
 role :db,  "ns382592.ovh.net", :primary => true 
-default_environment["PATH"] = "$PATH:/opt/ree/bin/"
+#default_environment["PATH"] = "$PATH:/opt/ree/bin/"
 
 namespace :deploy do
   task :start do ; end
