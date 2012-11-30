@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     g_locations.each do |g_location|
       r_location = Location.find_by_refuge_id(g_location.id)
       if r_location
-        r_location.update_attributes({occupation: g_location.members.count})
+        r_location.update_attributes({:occupation => g_location.members.count})
         
         @members_on_site[r_location.id] = g_location.members
       end
