@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126153121) do
+ActiveRecord::Schema.define(:version => 20121130144136) do
 
   create_table "ads", :force => true do |t|
     t.string   "subject"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20121126153121) do
     t.string  "app_url"
     t.string  "app_name"
     t.integer "max_post_on_index",     :default => 5
+    t.string  "gardien_login"
+    t.string  "gardien_password"
   end
 
   create_table "galleries", :force => true do |t|
@@ -93,9 +95,13 @@ ActiveRecord::Schema.define(:version => 20121126153121) do
     t.string   "address"
     t.string   "city"
     t.string   "zip"
-    t.integer  "occupation", :default => 0
-    t.datetime "updated_at",                :null => false
+    t.integer  "occupation",     :default => 0
+    t.datetime "updated_at",                     :null => false
+    t.integer  "max_occupation", :default => 20
+    t.integer  "refuge_id"
   end
+
+  add_index "locations", ["refuge_id"], :name => "index_locations_on_refuge_id"
 
   create_table "media_categories", :force => true do |t|
     t.datetime "created_at"
@@ -142,8 +148,10 @@ ActiveRecord::Schema.define(:version => 20121126153121) do
     t.boolean "www_published"
     t.boolean "is_active",      :default => true,      :null => false
     t.string  "logo_uid"
+    t.integer "refuge_id"
   end
 
+  add_index "members", ["refuge_id"], :name => "index_members_on_refuge_id"
   add_index "members", ["status_id"], :name => "index_members_on_status_id"
 
   create_table "menus", :force => true do |t|

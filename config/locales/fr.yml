@@ -138,6 +138,7 @@ fr:
   create_category: "+ Créer une nouvelle catégorie"
   delete_location_confirm: "Supprimer définitivement cette cordée et tout ce qui s'y référe ?!"
   location_name: "Nom"
+  location_refuge_id: "Refuge"
   location_address: "Adresse"
   location_zip: "Code postal"
   location_city: "Ville"
