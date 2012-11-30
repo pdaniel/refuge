@@ -1,6 +1,6 @@
 class AdsController < ApplicationController
   
-  before_filter :update_occupation, only: [:index]
+  before_filter :update_occupation, :only => [:index]
 
   # GET /ads
   # Show all ads                                           HTML
