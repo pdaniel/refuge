@@ -106,6 +106,7 @@ fr:
   create_category: "+ Create a new category"
   delete_location_confirm: "Definitly delete this location and everything relative ?!"
   location_name: "Name"
+  location_refuge_id: "Refuge"
   location_address: "Adress"
   location_zip: "Zip code"
   location_city: "City"

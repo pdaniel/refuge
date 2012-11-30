@@ -8,6 +8,7 @@
         %tr
           %th{:style=>'width:20px;'}= ''
           %th= t('location_name')
+          %th= t('location_refuge_id')
           %th= t('location_address')
           %th= t('location_zip')
           %th= t('location_city')
@@ -18,6 +19,7 @@
               %a{:href=>"/admin/locations/#{location.id}", :id=>location.id, :data=>{'method'=>'delete', 'confirm'=>t('delete_location_confirm')}}
                 %i.icon-remove
             %td= text_field_tag "location[#{location.id}][name]", location.name
+            %td= text_field_tag "location[#{location.id}][refuge_id]", location.refuge_id, :style=>'width:40px !important;'
             %td= text_field_tag "location[#{location.id}][address]", location.address
             %td= text_field_tag "location[#{location.id}][zip]", location.zip, :style=>'width:90px !important;'
             %td= text_field_tag "location[#{location.id}][city]", location.city
