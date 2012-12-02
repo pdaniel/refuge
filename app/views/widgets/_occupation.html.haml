@@ -3,29 +3,10 @@
     = t('actual_occupation_of_location')
     %select#locations_select
       - Location.all.each do |location|
-        %option{:value=>location.id, :selected=>location.id == current_member.location_id}= location.name
+        %option{:value => location.id, :selected=>location.id == current_member.location_id}= location.name
 
   #gauge
     #rate{:class=>('draggable' if is_admin)}
 
-  - Location.all.each do |location|
-    %a{:href=>'#', :class=>"occupation #{'hide' if location.id != current_member.location_id}", :id=>"location_id_#{location.id}", :data=>{'occupation'=>location.current_occupation_rate}}
-      = "#{t('last_update')} #{l(location.updated_at, :format=>:long)}"
-
-
--[].each do |location| #Location.all.each
-
-  .users_on_site
-    %h2.ribbon= location.name
-  
-    -(@members_on_site[location.id] || []).each do |g_member|
-      -begin
-        -member = Member.find_by_refuge_id(g_member.id)
-        = link_to thumbnail_tag(member, 'avatar', '50x50', :alt => "#{member.first_name} #{member.last_name}"), member_path(member.id)
-      -rescue
-        =thumbnail_tag
-        
-      
-  
-
-
+  - Location.occupation_rates.each do |location|
+    %a{:href => '#', :class => "occupation hide", :id => "location_id_#{location[:id]}", :data => {'occupation' => location[:occupation]}}

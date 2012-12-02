@@ -32,23 +32,6 @@ class ApplicationController < ActionController::Base
   def current_member
     current_user.member if current_user
   end
-  
-  def update_occupation
-    g_locations = Gardien::Location.all
-    
-    puts g_locations
-    
-    @members_on_site = {}
-    
-    g_locations.each do |g_location|
-      r_location = Location.find_by_refuge_id(g_location.id)
-      if r_location
-        r_location.update_attributes({:occupation => g_location.members.count})
-        
-        @members_on_site[r_location.id] = g_location.members
-      end
-    end
-  end
 
   helper_method :current_member
 
