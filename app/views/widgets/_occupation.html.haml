@@ -2,8 +2,8 @@
   #top
     = t('actual_occupation_of_location')
     %select#locations_select
-      - Location.all.each do |location|
-        %option{:value => location.id, :selected=>location.id == current_member.location_id}= location.name
+      - Location.occupation_rates.each do |location|
+        %option{:value => location[:id], :selected => location[:id].to_i == current_member.location_id}= location[:name]
 
   #gauge
     #rate{:class=>('draggable' if is_admin)}
