@@ -1,3 +1,4 @@
+require "whenever/capistrano"
 require "bundler/capistrano"
 
 set :application, "refuge"
