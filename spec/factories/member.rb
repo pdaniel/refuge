@@ -2,8 +2,8 @@ require 'RMagick'
 
 FactoryGirl.define do
   factory :member do
-    first_name 'guillaume'
-    last_name  'barillot'
+    first_name 'inactive'
+    last_name  'user'
     birthday   '1987-02-13' 
     avatar_uid 'default_avatar.png'
 
@@ -16,5 +16,6 @@ FactoryGirl.define do
     end
 
   end
+
 end
 

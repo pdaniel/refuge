@@ -35,11 +35,6 @@
             %span= "#{t('valid_until')} #{l(ad.end_at, :format=>:long)}"
 
           - else
-            /- raise ad.member.user.email.inspect
-            - begin 
-              - ad.member.user.email
-            - rescue
-              - raise ad.member.inspect
             %a{:href=>'#send_mail', :data=>{'toggle'=>'modal', :recipient=>'', :recipient_id=>ad.member.id}, :class=>'mail_me'}
               %i.icon-envelope
               = t('reply_this_ad')

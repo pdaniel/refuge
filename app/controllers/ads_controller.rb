@@ -5,7 +5,7 @@ class AdsController < ApplicationController
   # -----------------------------------------------------------
   def index
     @categories = Category.all
-    @ads = Ad.published
+    @ads = Ad.published.for_location(current_member.location_id)
   end
 
   # POST /ads
