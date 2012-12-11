@@ -17,7 +17,11 @@ module DragonflyHelper
       end
     end
 
-    time_stamp = File.new(this_image.path).mtime.to_i
+    begin
+      time_stamp = "?#{File.new(this_image.path).mtime.to_i}"
+    rescue
+      time_stamp = ''
+    end
 
     attrs << "alt='#{File.basename(this_image.name, '.*')}'" if options[:alt].blank?     
 
@@ -27,7 +31,9 @@ module DragonflyHelper
       height = "height='#{size.split('x')[1].to_i}'" 
     end
 
-    "<img src='/thumbnails/#{model.class.name.downcase}/#{model.id}/#{column}/#{size}/#{this_image.name}?#{time_stamp}' #{width}#{height} #{attrs} />".html_safe
+    unless time_stamp.blank?
+      "<img src='/thumbnails/#{model.class.name.downcase}/#{model.id}/#{column}/#{size}/#{this_image.name}#{time_stamp}' #{width}#{height} #{attrs} />".html_safe
+    end
   end
 
 end
