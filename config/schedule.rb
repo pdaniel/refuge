@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 15.minutes do
-  rake "update_remplitude"
+  rake "update_remplitude RAILS_ENV='production'"
 end
