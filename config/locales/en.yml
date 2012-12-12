@@ -55,6 +55,7 @@ fr:
   references: "My references"
   hobbies: "My hobbies"
   powers: "My super-powers"
+  refuge_id: "ID Refuge"
   presence: "You can see me more likely"
   cordee_location: "Member of "
   new_account_creation: "New member creation"
