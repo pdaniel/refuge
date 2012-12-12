@@ -18,7 +18,6 @@ role :app, "ns382592.ovh.net"
 role :db,  "ns382592.ovh.net", :primary => true 
 
 default_environment["PATH"] = "$PATH:/opt/ree/bin/"
-export GEM_PATH="$GEM_HOME:/opt/ree/lib/ruby/gems/1.8/gems"
 
 namespace :deploy do
   task :start do ; end
