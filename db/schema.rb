@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211140746) do
+ActiveRecord::Schema.define(:version => 20121212085626) do
 
   create_table "ads", :force => true do |t|
     t.string   "subject"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(:version => 20121211140746) do
 
   create_table "members", :force => true do |t|
     t.integer "user_id"
-    t.string  "first_name",     :default => "anonyme"
+    t.string  "first_name",            :default => "anonyme"
     t.string  "last_name"
     t.date    "birthday"
     t.string  "city"
@@ -147,9 +147,11 @@ ActiveRecord::Schema.define(:version => 20121211140746) do
     t.text    "website_2"
     t.text    "mobile"
     t.boolean "www_published"
-    t.boolean "is_active",      :default => true,      :null => false
+    t.boolean "is_active",             :default => true,      :null => false
     t.string  "logo_uid"
     t.integer "refuge_id"
+    t.float   "total_heures_guardien"
+    t.date    "debut_mois_gardien"
   end
 
   add_index "members", ["refuge_id"], :name => "index_members_on_refuge_id"
