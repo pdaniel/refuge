@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121130144136) do
+ActiveRecord::Schema.define(:version => 20121211140746) do
 
   create_table "ads", :force => true do |t|
     t.string   "subject"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20121130144136) do
     t.datetime "updated_at",                     :null => false
     t.integer  "max_occupation", :default => 20
     t.integer  "refuge_id"
+    t.integer  "remplitude",     :default => 0
   end
 
   add_index "locations", ["refuge_id"], :name => "index_locations_on_refuge_id"
