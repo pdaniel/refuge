@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(:version => 20121212085626) do
 
   create_table "members", :force => true do |t|
     t.integer "user_id"
-    t.string  "first_name",            :default => "anonyme"
+    t.string  "first_name",                       :default => "anonyme"
     t.string  "last_name"
     t.date    "birthday"
     t.string  "city"
@@ -147,10 +147,11 @@ ActiveRecord::Schema.define(:version => 20121212085626) do
     t.text    "website_2"
     t.text    "mobile"
     t.boolean "www_published"
-    t.boolean "is_active",             :default => true,      :null => false
+    t.boolean "is_active",                        :default => true,      :null => false
     t.string  "logo_uid"
     t.integer "refuge_id"
     t.float   "total_heures_guardien"
+    t.float   "total_heures_facturable_guardien"
     t.date    "debut_mois_gardien"
   end
 

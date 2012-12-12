@@ -30,6 +30,7 @@ gem 'acts_as_tree_rails3'
 gem 'birthday', '~> 0.2.0'
 gem 'multi_json'
 gem 'whenever'
+gem 'rails-i18n'
 
 group :development, :test do
   # Pretty printed test output
