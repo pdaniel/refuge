@@ -1,0 +1,10 @@
+-if current_member.total_heures_guardien > 0
+  #refuge
+    %p
+      Présence : 
+      ="#{current_member.total_heures_guardien.round} h"
+      =" (#{current_member.total_heures_facturable_guardien.round} h facturées)"
+      %br
+      %small
+        depuis le
+        =current_member.debut_mois_gardien.strftime("%d/%m/%Y")

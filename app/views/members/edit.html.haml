@@ -162,6 +162,9 @@
             %select{:name=>'user[role]', :style=>'margin-right:20px;'}
               %option{:value=>'user', :selected => @member.user.role == 'user'}= 'User'
               %option{:value=>'admin', :selected => @member.user.role == 'admin'}= 'Admin'
+          .span4.right
+            = t('refuge_id')
+            = f.text_field :refuge_id
 
       .span11
         = submit_tag t(:save), :class=>'btn  btn-warning', :style=>'float:right; margin-right:20px;'

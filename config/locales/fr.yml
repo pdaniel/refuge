@@ -87,6 +87,7 @@ fr:
   references: "Mes réferences"
   hobbies: "Mes loisirs"
   powers: "Super-pouvoirs"
+  refuge_id: "ID Refuge"
   presence: "Je suis plutôt à la Cordée"
   cordee_location: "Membre de la cordée"
   new_account_creation: "Création d'un nouveau membre"
