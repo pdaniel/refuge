@@ -28,7 +28,7 @@ namespace :deploy do
   end
 
   task :symlink_shared do
-    run "ln -s #{shared_path}/.bundle #{release_path}/.bundle"
+    #run "ln -s #{shared_path}/.bundle #{release_path}/.bundle"
     run "ln -s #{shared_path}/config/database.yml #{release_path}/config/"
     run "rm -rf #{release_path}/medias && ln -s #{shared_path}/medias #{release_path}/medias"
     run "rm -rf #{release_path}/public/images && ln -s #{shared_path}/public/images #{release_path}/images"
@@ -39,7 +39,7 @@ namespace :deploy do
   task :precompile_assets do
     run "cd #{release_path}; export PATH=/opt/ree/bin:$PATH"
     run "cd #{release_path}; bundle install"
-    run "/bin/bash -l -c cd #{release_path}; rake assets:precompile RAILS_ENV=production"
+    run "cd #{release_path}; rake assets:precompile RAILS_ENV=production"
   end
 
 end
