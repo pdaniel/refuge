@@ -22,3 +22,7 @@
 every 15.minutes do
   rake "update_remplitude RAILS_ENV='production'"
 end
+
+every 12.hours do
+  rake "update_heures RAILS_ENV='production'"
+end
