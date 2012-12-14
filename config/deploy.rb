@@ -39,7 +39,7 @@ namespace :deploy do
   task :precompile_assets do
     run "cd #{release_path}; export PATH=/opt/ree/bin:$PATH"
     run "cd #{release_path}; bundle install"
-    run "cd #{release_path}; rake assets:precompile RAILS_ENV=production"
+    run "/bin/bash -l -c cd #{release_path}; rake assets:precompile RAILS_ENV=production"
   end
 
 end
