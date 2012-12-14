@@ -12,6 +12,7 @@ group :assets do
 end
 
 gem 'mysql2'
+gem 'rake', '10.0.2'
 gem 'rmagick'
 gem 'will_paginate'
 gem 'acts_as_tree_rails3'
