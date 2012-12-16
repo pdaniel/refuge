@@ -33,6 +33,10 @@ gem 'multi_json'
 gem 'whenever'
 gem 'rails-i18n'
 
+group :production, :staging do
+  gem 'passenger'
+end
+
 group :development, :test do
   # Pretty printed test output
   gem 'turn', :require => false
