@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212085626) do
+ActiveRecord::Schema.define(:version => 20121220222608) do
 
   create_table "ads", :force => true do |t|
     t.string   "subject"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20121212085626) do
     t.integer "max_post_on_index",     :default => 5
     t.string  "gardien_login",                           :null => false
     t.string  "gardien_password",                        :null => false
+    t.string  "tasks_token"
   end
 
   create_table "galleries", :force => true do |t|
@@ -147,9 +148,10 @@ ActiveRecord::Schema.define(:version => 20121212085626) do
     t.boolean "www_published"
     t.boolean "is_active",                        :default => true,      :null => false
     t.string  "logo_uid"
-    t.float   "total_heures_guardien"
-    t.float   "total_heures_facturable_guardien"
+    t.float   "total_heures_guardien",            :default => 0.0,       :null => false
+    t.float   "total_heures_facturable_guardien", :default => 0.0,       :null => false
     t.date    "debut_mois_gardien"
+    t.integer "gardien_id",                                              :null => false
   end
 
   add_index "members", ["status_id"], :name => "index_members_on_status_id"

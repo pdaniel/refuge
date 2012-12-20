@@ -57,6 +57,26 @@ class Member < ActiveRecord::Base
     return out
   end
 
+  def self.update_hours
+    begin
+      Gardien::Member.all.each do |member|
+        this_member = Member.find_by_gardien_id(member.id)
+
+        if this_member
+          this_member.update_attributes({
+            :total_heures_guardien => member.total_hours, 
+            :total_heures_facturable_guardien => member.billable_hours, 
+            :debut_mois_gardien => member.since
+          }) 
+        end  
+          
+      end
+    rescue
+      # Oooops, gardien is down
+      # !!! TODO : notice admin
+    end
+  end
+
 private
 
   # Compose SQL date from day and month

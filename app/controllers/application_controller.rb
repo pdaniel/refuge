@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # Check we're logged
   def is_logged
     # Place here controllers where authentication is not required
-    unsecured = ['devise/sessions', 'devise/passwords', 'iframes/members']
+    unsecured = ['devise/sessions', 'devise/passwords', 'iframes/members', 'tasks']
 
     redirect_to '/users/sign_in' if (!user_signed_in? && !unsecured.include?(params[:controller]))
   end
