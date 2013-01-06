@@ -1,21 +1,26 @@
 !!!
 %head
   %meta{:charset=>"utf-8"}
-  %title= t('app.title')
+  %title= $conf.app_name
   = stylesheet_link_tag 'application'
   = stylesheet_link_tag '/javascripts/jquery_lightness/css/ui-lightness/jquery-ui-1.8.16.custom.css'
+  = stylesheet_link_tag '/slimbox/css/slimbox2.css'
+  = stylesheet_link_tag '/javascripts/fullcalendar-1.5.3/fullcalendar/fullcalendar.css'
 
   = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
   = javascript_include_tag '/javascripts/jquery_lightness/js/jquery-ui-1.8.16.custom.min.js'
   = javascript_include_tag '/javascripts/jquery_lightness/js/jquery.ui.datepicker-fr.js'
+  = javascript_include_tag '/slimbox/js/slimbox2.js'
+  = javascript_include_tag '/javascripts/jquery.linkify-1.0-min.js'
   = javascript_include_tag 'application'
+
   = csrf_meta_tags
 
 %body
   #top_bar
     = render :partial=>'shared/top_bar'
 
-  .container
+  #main.container
     .row
       .span12
         = yield
@@ -25,25 +30,26 @@
   #footer
     %p
       = t('handcrafted_with_love')
-      %a{:href=>'http://www.guillaume-barillot.com', :target=>'blank'}
+      %a{:href=>'http://www.guillaume-barillot.com', :target=>'_blank'}
         = t('guillaume_barillot')
       = t('using')
-      %a{:href=>'http://rubyonrails.org', :target=>'blank'}
+      %a{:href=>'http://rubyonrails.org', :target=>'_blank'}
         = t('ror')
       = t('and')
-      %a{:href=>'http://twitter.github.com/bootstrap', :target=>'blank'}
+      %a{:href=>'http://twitter.github.com/bootstrap', :target=>'_blank'}
         = t('twitter_bootstrap')
       = '|'
       = t('cmon')
-      %a{:href=>'https://github.com/la-cordee/refuge', :target=>'blank'}
+      %a{:href=>'https://github.com/la-cordee/refuge', :target=>'_blank'}
         = t('fork_me')
+
+  .clear.footer_spacer
 
 - #### Flash messages handler ####
 - if flash[:error] && !flash[:error].strip.blank?
   .modal#error_modal
     .modal-header
-      %a.close{:data=>{'dismiss'=>'modal'}}
-        = '×'
+      %a.close{:data=>{'dismiss'=>'modal'}}= '×'
       %h3= t('warnings.error')
 
     .modal-body

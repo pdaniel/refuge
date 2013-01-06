@@ -7,28 +7,40 @@ class Member < ActiveRecord::Base
   has_many :ads
   has_many :networks, :through=>:profiles
   has_many :profiles
+  has_many :comments
 
   validates_presence_of :first_name
   before_update :compose_birthday
 
   image_accessor :avatar
+  image_accessor :logo
 
-  normalize_attributes :website, :baseline, :organisation, :prestations, :references, :city, :hobbies, :powers
-  normalize_attribute :phone, :with=>:phone
+  normalize_attributes :website, :baseline, :organisation, :presence, :prestations, :references, :city, :hobbies, :powers, :organisation_2, :website_2, :logo_uid
+  normalize_attribute :phone, :mobile, :with=>:phone
 
   acts_as_birthday :birthday
 
+  scope :www_published, self.where(['www_published = ? AND is_active = ?', true, true])
+  scope :active, self.where(['is_active = ?', true])
+
   # Weither a user can edit or just view a given content
-  def self.can_edit?(current_user, current_id)
-    ((current_user.role == 'admin' && !current_user.view_as_user)|| current_id == current_user.member.id)? true : false
+  def self.can_edit?(current_user, member_id)
+    ((current_user.role == 'admin' && !current_user.view_as_user) || current_user.member.id == member_id) ? true : false
   end
 
   # Search member by column and keywords
-  def self.search_by(category, keywords)
+  def self.search_by(category, keywords, is_active)
     column = self.fields[category]
 
     if column
-      self.where(["#{column} LIKE ?", "%#{keywords}%"]).order("#{column} ASC")
+      case is_active
+      when 'true'
+        self.where(["#{column} LIKE ? AND members.is_active = ?", "%#{keywords}%", true]).order("#{column} ASC")
+      when 'false'
+        self.where(["#{column} LIKE ? AND members.is_active = ?", "%#{keywords}%", false]).order("#{column} ASC")
+      else
+        self.where(["#{column} LIKE ?", "%#{keywords}%"]).order("#{column} ASC")
+      end
     else
       Array.new
     end
@@ -36,13 +48,33 @@ class Member < ActiveRecord::Base
 
   # DB fields we can search into for search patterns
   def self.fields
-    fields = ['first_name', 'last_name', 'prestations', 'powers', 'organisation']
+    fields = ['first_name', 'last_name', 'organisation', 'prestations', 'powers']
 
     out = Hash.new
     # front label in select => DB column name
     fields.each{|f|out.update("searchable_fields.#{f}" => f)}
 
     return out
+  end
+
+  def self.update_hours
+    begin
+      Gardien::Member.all.each do |member|
+        this_member = Member.find_by_gardien_id(member.id)
+
+        if this_member
+          this_member.update_attributes({
+            :total_heures_guardien => member.total_hours, 
+            :total_heures_facturable_guardien => member.billable_hours, 
+            :debut_mois_gardien => member.since
+          }) 
+        end  
+          
+      end
+    rescue
+      # Oooops, gardien is down
+      # !!! TODO : notice admin
+    end
   end
 
 private

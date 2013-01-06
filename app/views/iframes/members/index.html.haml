@@ -1,0 +1,11 @@
+#api_members_list
+  - @members.each do |member|
+    .member_resume
+      .member_avatar
+        %a{:href => iframes_member_path(member.id)}
+          = thumbnail_tag(member, 'avatar', '65x65', :alt => "#{member.first_name} #{member.last_name}")
+
+      %span= link_to member.first_name, iframes_member_path(member.id)
+
+  .clear{:style => 'height:20px;'}
+

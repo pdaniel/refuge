@@ -1,30 +1,10 @@
 class DashboardController < ApplicationController
 
-  before_filter :is_logged, :load_conf
-
   # GET /
   # Show dashboard main root page                                HTML
   # -----------------------------------------------------------------
   def index
-    @new_ones = User.order('created_at DESC').limit(6).includes(:member)
-
-    @categories = Category.all
-
-    @ads = Ad.where(['
-      end_at > ?
-      AND (
-        location_id = 0
-        OR location_id = ?
-        OR member_id = ?
-      )',
-      Time.now, current_user.member.location_id, current_user.member.id
-      ]).order('ads.created_at DESC').includes(:member)
-
-    @locations = Location.all
-
-    @surveys = Survey.where(['location_id = ? AND parent_id = 0', $conf.default_location_id]).order('created_at DESC')
-
-    @birthdays = Member.birthday_today
+    @posts = Post.last_posts
   end
 
   # POST /dashboard
@@ -32,7 +12,7 @@ class DashboardController < ApplicationController
   # -----------------------------------------------------------
   def create
 
-    params[:ad][:member_id] = current_user.member.id
+    params[:ad][:member_id] = current_member.id
 
     if params[:id].strip.blank?
       new_ad = Ad.create(params[:ad])
@@ -52,10 +32,10 @@ class DashboardController < ApplicationController
     @survey = Survey.find(params[:survey_id])
 
     @voters_count = @survey.voters.length
-    @survey.voters.include?(current_user.member.id)? @already_voted = true : @already_voted = false
+    @survey.voters.include?(current_member.id)? @already_voted = true : @already_voted = false
 
     if !@already_voted && params[:vote]
-      Survey.vote(current_user.member.id, params[:vote])
+      Survey.vote(current_member.id, params[:vote])
       @voters_count += 1
     end
 

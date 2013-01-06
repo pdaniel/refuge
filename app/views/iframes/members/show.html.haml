@@ -1,0 +1,37 @@
+.span12.member_iframe
+  .span3{:style => 'width: 180px;overflow:hidden;'}
+    .avatar
+      = thumbnail_tag @member, 'avatar', '180x180', :alt => "#{@member.first_name} #{@member.last_name}"
+
+  .span5{:style=>'width:390px;padding-left:10px;overflow:hidden'}
+    %h1= @member.first_name
+    %h2= @member.last_name
+
+    - if @member.baseline
+      #baseline= @member.baseline
+
+  .clear.h-30
+
+  - if member_has_infos?(@member)
+    .span7.well.details
+      %table{:style => 'table-layout:fixed'}
+        - if @member.organisation
+          %tr
+            %td
+              %p= t('activity_1')
+            %td
+              - if @member.website
+                %p= link_to @member.organisation, "http://#{@member.website}", :target => 'blank'
+              - else
+                %p= @member.organisation
+
+
+        - if @member.prestations
+          %tr
+            %td{:style => 'vertical-align:top'}
+              %p= t('prestations')
+            %td{:style => 'word-wrap: break-all;'}
+              = simple_format @member.prestations
+
+      .clear
+

@@ -1,7 +1,6 @@
 .span12
   .span3
-    .avatar
-      = avatar(@member, '180x180')
+    = thumbnail_tag @member, :avatar, '180x180', :alt => "#{@member.first_name} #{@member.last_name}"
 
   .span8
     %h1= @member.first_name
@@ -18,59 +17,75 @@
   .clear{:style=>'height:30px;'}
 
   - if member_has_infos?(@member) || member_has_profile?(@pro_networks) || member_has_profile?(@perso_networks)
-    .span7.well#details
+    .span7.well.details
       %table
         - if @member.organisation
           %tr
             %td
-              %p= t('organisation')
+              %p= t('activity_1')
             %td
               - if @member.website
-                %p= link_to @member.organisation, @member.website
+                - target = @member.website.split('http://')
               - else
-                %p= @member.organisation
+                - target = []
+              %p= @member.website ? link_to(@member.organisation, "http://#{target.last}", :target => '_blank') : @member.organisation
+
+        - if @member.organisation_2
+          %tr
+            %td
+              %p= t('activity_2')
+            %td
+              %p= @member.website_2 ? link_to(@member.organisation_2, @member.website_2) : @member.organisation_2
+
         - if @member.prestations
           %tr
             %td
               %p= t('prestations')
             %td
-              %p= @member.prestations
+              = simple_format @member.prestations
+
         - if @member.references
           %tr
             %td
-              %p= t('references')
+              %p= t('specificities')
             %td
-              %p= @member.references
-        - if @member.phone
+              = simple_format @member.references
+
+        - if @member.mobile
           %tr
             %td
               %p= t('phone')
             %td
-              %p= phone_number @member.phone
+              %p= phone_number @member.mobile
+
         - if @member.city
           %tr
             %td
               %p= t('I_live_in')
             %td
               %p= @member.city.capitalize
+
         - if @member.hobbies
           %tr
             %td
               %p= t('hobbies')
             %td
-              %p= hard_clean @member.hobbies
+              = simple_format @member.hobbies
+
         - if @member.powers
           %tr
             %td
               %p= t('powers')
             %td
-              %p= hard_clean @member.powers
+              = simple_format @member.powers
+
         - if @member.presence
           %tr
             %td
               %p= t('presence')
             %td
               %p= @member.presence
+
         - if member_has_profile?(@pro_networks) || member_has_profile?(@perso_networks)
           %tr
             %td= ''
@@ -94,5 +109,5 @@
 
       .clear
 
-= render :partial=>'shared/send_mail_modal'
+= render :partial=>'/modals/send_mail_modal'
 

@@ -5,31 +5,14 @@ module ApplicationHelper
     Time.now.hour > 18 ? t(:good_evening) : t(:good_morning)
   end
 
-  # Left menu tabs, remove/add you own here
-  def tabs
-    tabs = [
-      {:name   => 'dashboard',
-       :icon   => 'icon-home icon-white',
-       :url    => 'dashboard'
-      },
-      {:name   => 'members',
-       :icon   => 'icon-search icon-white',
-       :url    => 'members'
-      },
-      {:name   => 'meetings',
-       :icon   => 'icon-time icon-white',
-       :url    => 'pages/meetings'
-      },
-      {:name   => 'events',
-       :icon   => 'icon-glass icon-white',
-       :url    => 'pages/events'
-      }
-    ]
-  end
-
   # Which role are you playing ?
   def is_admin
     (current_user.role == 'admin' && !current_user.view_as_user) ? true : false
+  end
+
+  # Just a handy shortcut
+  def current_member
+    current_user.member if current_user
   end
 
   # Display socials networks links and icon if profile exists
@@ -81,15 +64,6 @@ module ApplicationHelper
     end
   end
 
-  # Show member avatar or default avatar
-  def avatar(member, size)
-    if member.avatar
-      image_tag member.avatar.thumb(size).url, :alt=>"#{member.first_name} #{member.last_name}"
-    else
-      image_tag $conf.default_avatar.thumb(size).url, :alt=>t('default_avatar')
-    end
-  end
-
   # Format gauge width for surveys
   def gauge(percentage)
     (((percentage.to_f/100.to_f)*490.to_f)+30.to_f).to_i
@@ -105,26 +79,32 @@ module ApplicationHelper
     '<iframe width="560" height="315" src="http://'+vid+'" frameborder="0" allowfullscreen></iframe>' if vid
   end
 
-  # PHP, get out of this body !
-  def nl2br(s)
-    s.gsub(/\n/, '<br />')
-  end
-
   # Clean-up all tags except <br />
   def hard_clean(s)
-    sanitize nl2br(s), :tags => %w(br)
+    sanitize simple_format(s), :tags => %w(br)
   end
 
   # Clean-up except tags potentially used in TinyMCE
   def soft_clean(s)
-    sanitize s, :tags => %w(br p table tr td a img ul ol li h1 h2 h3 h4 h5 h6 b font), :attributes => %w(id class style color alt src)
+    sanitize s, :tags => %w(strong br p table tr td a img ul ol li h1 h2 h3 h4 h5 h6 b font), :attributes => %w(id class style color alt src href)
   end
 
   # Formatted default end date for ads : seven days from now
   def default_end_at
     (7.days.since(Time.now)).strftime('%Y-%m-%d')
   end
-  
+
+  def fullmonth_names_start_1
+    months = I18n.t('date.month_names')[1..-2]
+    months.to_json
+  end
+
+  def shortmonth_names_start_1
+    months = I18n.t('date.abbr_month_names')[1..-2]
+    months.to_json
+  end
+
+  # Testing stuff
   extend self
 end
 

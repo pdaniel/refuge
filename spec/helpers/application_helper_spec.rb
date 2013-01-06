@@ -2,7 +2,13 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
+
+  after(:each) do
+    DatabaseCleaner.clean
+  end
+
   describe "#member_has_infos?" do
+
     context "member is empty" do
       before :each do
         @member = Member.new
@@ -48,20 +54,21 @@ describe ApplicationHelper do
   end
 
   describe "is_admin" do
+
     let(:current_user) { @current_user }
 
-    it "should not idenity a dumb user as an admin" do
-      @current_user = Factory.build(:user)
+    it "should not identify a dumb user as an admin" do
+      @current_user = FactoryGirl.create :user
       is_admin.should be_false
     end
 
     it "should identify an admin" do
-      @current_user = Factory.build(:admin)
+      @current_user = FactoryGirl.create :user, :role => 'admin'
       is_admin.should be_true
     end
 
     it "should not identify an admin when view as user" do
-      @current_user = Factory.build(:admin, view_as_user: true)
+      @current_user = FactoryGirl.create :user, :role => 'admin', :view_as_user => true
       is_admin.should be_false
     end
   end
@@ -72,14 +79,15 @@ describe ApplicationHelper do
       ApplicationHelper.member_has_profile?(networks).should be_false
     end
 
-    it "should return false if there is no valid network" do 
+    it "should return false if there is no valid network" do
       networks = [{}]
       ApplicationHelper.member_has_profile?(networks).should be_false
     end
 
-    it "sould return true if there is at least one valid network" do 
+    it "sould return true if there is at least one valid network" do
       networks = [{},{url: 'toto'}]
       ApplicationHelper.member_has_profile?(networks).should be_true
     end
   end
 end
+

@@ -11,6 +11,9 @@ User.create(
 Location.create
 
 Conf.create(
-  :default_avatar_uid => '2012/04/15/13_58_04_30_default_avatar.png'
+  :default_avatar_uid => '2012/04/15/13_58_04_30_default_avatar.png',
+  :default_location_id => 1,
+  :max_surveys => 1,
+  :max_post_on_index => 5
 )
 

@@ -7,6 +7,10 @@ class Article < ActiveRecord::Base
 
   normalize_attributes :title, :content, :calendar, :video
 
+  scope :get_page_articles, lambda{|location_id, category|
+    self.where(['(location_id = ? OR location_id = 0) AND category = ?', location_id, category]).order('created_at DESC')
+  }
+  
 private
 
   # Strip and filter calendar snippet

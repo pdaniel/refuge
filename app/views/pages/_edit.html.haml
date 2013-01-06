@@ -6,7 +6,7 @@
 
     = hidden_field_tag 'article[category]', params[:id]
 
-    %p.well
+    %p.well{:style => 'visibility:hidden'} 
       = t('content_visibility')
       %select{:name=>'article[location_id]'}
         %option{:value=>0}= t('all_locations')
@@ -16,7 +16,7 @@
     %label= t('title')
     = text_field_tag 'article[title]'
 
-    %label= t('calendar')
+    %label= t('calendar_snippet')
     = text_field_tag 'article[calendar]'
 
     %label= t('video')
@@ -35,8 +35,9 @@
     = form_tag "/pages/#{article.id}", :method=>:put do
 
       = hidden_field_tag 'article[category]', params[:id]
+      = hidden_field_tag 'article[location_id]', '0'
 
-      %p.well
+      %p.well{:style => 'display: none'} 
         = t('content_visibility')
         %select{:name=>'article[location_id]'}
           %option{:value=>0}= t('all_locations')
@@ -46,7 +47,7 @@
       %label= t('title')
       = text_field_tag 'article[title]', article.title
 
-      %label= t('calendar')
+      %label= t('calendar_snippet')
       = text_field_tag 'article[calendar]', show_calendar(article.calendar)
 
       %label= t('video')
@@ -64,6 +65,5 @@
       = submit_tag t('save'), :class=>'btn btn-warning right'
     .clear
 
-= javascript_include_tag "/javascripts/tinymce/jscripts/tiny_mce/tiny_mce.js"
-= javascript_include_tag "/javascripts/tinymce/init.js"
+= t_init(:name => 'article[content]', :height => '260px', :width => '880px')
 

@@ -1,0 +1,42 @@
+.span12.blog
+  .left
+    %h2= @post.title.capitalize
+    %span.post_attributes
+      = "#{t('blog.published_at')} #{l(@post.published_at)} #{t('blog.in_category')}"
+      = link_to @post.blog_category.name, blog_category_path(@post.blog_category.id)
+
+    = soft_clean @post.content
+
+    .clear
+    %br
+    - if is_admin
+      %a.right.label.label-important{:href => '#create_post_modal', :data=>{'toggle'=>'modal'}, :id => 'edit_post'}= t('blog.edit_this_post')
+      %br
+
+    .comments
+      %h4= t('blog.leave_a_comment')
+      .clear
+      = form_tag "/blog/#{@post.id}", :method => :put do
+        = text_area_tag "comment"
+        = submit_tag t('save'), :class => 'btn btn-warning right', :id => 'save_comment'
+
+      - @post.comments.each do |comment|
+        .comment
+          .left.avatar
+            %a{:href=>member_path(comment.member_id)}
+              = thumbnail_tag(comment.member, 'avatar', '50x50', :alt => "#{comment.member.first_name} #{comment.member.last_name}")
+          .left.date
+            %strong= "#{t('the')} #{l(comment.created_at, :format => :long)} #{t('by')} #{comment.member.first_name}"
+            %p= simple_format comment.content
+
+          - if is_admin
+            .clear
+            %a.right.label.label-important{:href => comment_path(comment), :data => {:method => :delete, :confirm => t('confirms.delete_this_comment')}}= t('delete')
+      .clear
+
+  .right
+    = render :partial => 'right_column'
+
+- if is_admin
+  = render :partial => '/modals/create_post_modal'
+

@@ -1,0 +1,22 @@
+#toggle_event.modal.hide.fade
+  .modal-header
+    %a.close{:data=>{'dismiss'=>'modal'}}
+      = '×'
+    %h3
+      = t('event_details_modal_title')
+      %span#event_details
+
+  .modal-body
+    #event_description
+
+    %br
+    %a#send_event_registration{:href => '#'}
+      .icon-pencil
+      = t('register_this_event')
+
+    %input{:type => 'hidden', :id => 'event_date'}
+    %input{:type => 'hidden', :id => 'event_name'}
+    %input{:type => 'hidden', :id => 'calendar_id', :value => @calendar.id}
+    %input{:type => 'hidden', :id => 'user_id', :value => current_user.id}
+    %input{:type => 'hidden', :id => 'register_ok_message', :value => t('register_ok_message')}
+

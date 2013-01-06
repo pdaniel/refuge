@@ -1,0 +1,92 @@
+.span11{:style=>'width:880px;'}
+
+  .well#calendar_header
+    - if is_admin
+      %a{:href => '#', :class => 'doToggleCalendarEditor'}= t('calendar.edit_calendar')
+      .clear
+    %h2= @calendar.name
+    %br
+    = soft_clean(@calendar.description)
+
+  - if is_admin
+    .well#calendar_editor.hide
+      %a{:href => '#', :class => 'doToggleCalendarEditor'}= t('calendar.edit_calendar')
+      .clear
+      = form_tag admin_event_path(@calendar), :method => :put do
+        %label= t('calendar.name')
+        = text_field_tag 'calendar[name]', @calendar.name
+        %br
+        %label= t('calendar.mail_to')
+        = text_field_tag 'calendar[email]', @calendar.email
+        %br
+        %label= t('calendar.rss')
+        = text_field_tag 'calendar[rss]', @calendar.rss
+        %br
+        %label= t('calendar.description')
+        .content_container.hide
+          = soft_clean @calendar.description
+        .textarea_container
+        %br
+        = submit_tag t('update'), :class=>'btn btn-warning right'
+
+  .clear
+
+  #calendar
+
+:javascript
+  $(document).ready(function() {
+    $('#calendar').fullCalendar({
+      events: "#{@calendar.rss}",
+
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay'
+      },
+      defaultView: 'month',
+      timeFormat: '(HH:mm)',
+      eventColor: '#378006',
+      firstDay: 1,
+      buttonText: { 
+        today: "#{I18n.t('calendar.today')}", 
+        month: "#{I18n.t('calendar.month')}",
+        week: "#{I18n.t('calendar.week')}",
+        day: "#{I18n.t('calendar.day')}"
+      },
+
+      eventClick: function(calEvent, jsEvent, view) {
+
+        months = #{fullmonth_names_start_1};
+        start_date = new Date(calEvent.start);
+        formated_date = start_date.getDate() +' '+ months[start_date.getMonth()] +' '+ start_date.getFullYear();
+        formated_hour = pad2(start_date.getHours()) +':'+ pad2(start_date.getMinutes());
+        
+        $('#toggle_event #event_details').empty();
+        $('#toggle_event #event_details').append(formated_date +', '+ formated_hour);
+
+        $('#toggle_event .modal-body #event_description').empty();
+        $('#toggle_event .modal-body #event_description').append(calEvent.title +'<br /><br /><strong>'+ calEvent.location +'</strong><br /><br />'+ calEvent.description);
+
+        $('#toggle_event .modal-body #event_date').val(formated_date +', '+ formated_hour);
+        $('#toggle_event .modal-body #event_name').val(calEvent.title);
+        $('#toggle_event').modal('toggle');
+
+        /* Prevent gcal linking by default */
+        return false;
+      },
+
+      monthNames: #{fullmonth_names_start_1},
+      monthNamesShort: #{fullmonth_names_start_1},
+      dayNames: #{I18n.t('date.day_names').to_json},
+      dayNamesShort: #{I18n.t('date.abbr_day_names').to_json}
+
+    })
+  });
+
+= render :partial => '/modals/toggle_event_modal'
+
+= javascript_include_tag '/javascripts/fullcalendar-1.5.3/fullcalendar/fullcalendar.min.js'
+= javascript_include_tag '/javascripts/fullcalendar-1.5.3/fullcalendar/gcal.js'
+
+= t_init(:name => 'calendar[description]', :width => '838')
+

@@ -1,0 +1,57 @@
+= render :partial => '/admin/shared/left_column'
+
+.span10
+  #global_conf.well
+    %p.label= t('default_avatar')
+    .left
+      = image_tag $conf.default_avatar.thumb('101x101').url, :alt => t('default_avatar')
+    .right
+      = form_tag '/admin/conf', :multipart => true do
+        = file_field_tag "conf[default_avatar]"
+        = submit_tag t('send'), :class=>'btn  btn-warning'
+    .clear
+
+    %p.label= t('conf.max_post_on_index')
+    = form_tag '/admin/conf' do
+      = text_field_tag "conf[max_post_on_index]", $conf.max_post_on_index
+      = submit_tag t('save'), :class=>'btn  btn-warning'
+    .clear
+
+    %p.label= t('conf.app_name')
+    %p
+    = form_tag '/admin/conf' do
+      = text_field_tag "conf[app_name]", $conf.app_name
+      = submit_tag t('save'), :class=>'btn  btn-warning'
+    .clear
+
+    %p.label= t('conf.app_url')
+    = form_tag '/admin/conf' do
+      = text_field_tag "conf[app_url]", $conf.app_url
+      = submit_tag t('save'), :class=>'btn  btn-warning'
+    .clear
+
+    %p.label= t('default_newsletter_banner')
+    .left
+      = (image_tag $conf.newsletter_header.url) if $conf.newsletter_header
+    .right
+      = form_tag '/admin/conf', :multipart => true do
+        = file_field_tag "conf[newsletter_header]"
+        = submit_tag t('send'), :class=>'btn  btn-warning'
+    .clear
+
+    %p.label= t('welcome_mail')
+    = form_tag '/admin/conf' do
+
+      %label= t('welcome_mail_subject')
+      = text_field_tag "conf[welcome_mail_subject]", $conf.welcome_mail_subject, :style=>'width:730px;'
+
+      %label= t('welcome_mail_body')
+      .content_container.hide
+        = soft_clean $conf.welcome_mail_body
+      .textarea_container
+      %br
+      = submit_tag t(:create), :class=>'btn  btn-danger', :style=>'float:right;margin-right:10px;'
+
+
+= t_init(:name => 'conf[welcome_mail_body]')
+

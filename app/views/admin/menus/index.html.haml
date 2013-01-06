@@ -1,0 +1,25 @@
+= render :partial => '/admin/shared/left_column'
+
+.span10
+  .menus.well
+    %p.label= t('admin.menu_management')
+
+    %br
+    = form_for admin_menus_path do
+      %ul.menus_items{:data => {'do' => 'sort'}}    
+        - @items.each do |item|
+          %li
+            .col
+              = link_to "⇕", '#', :class => 'drag'
+            .col
+              = check_box_tag "item[#{item.id}][published]", true, item.published
+            .col
+              = text_field_tag "item[#{item.id}][name]", item.name
+              = t('admin.page_type')
+              = t("admin.pages.#{item.controller}")
+              = hidden_field_tag "item[#{item.id}][position]", item.position, :data => {:handle => 'position'}
+
+      %br
+      %br
+      = submit_tag t('save'), :class => 'btn  btn-warning'
+

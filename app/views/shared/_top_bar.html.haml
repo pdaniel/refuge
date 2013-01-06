@@ -1,26 +1,37 @@
 .container
-  #avatar
-    = avatar(current_user.member, '32x32')
+  .avatar
+    = thumbnail_tag current_member, 'avatar', '46x32', :alt => "#{current_member.first_name} #{current_member.last_name}"    
 
-  #profil_link
-    %span= hello
-    = link_to current_user.member.first_name, member_path(current_user.member.id)
+  .profil_link
+    %ul.level-1.dropdown
+      %li
+        = link_to "#{hello} #{truncate(current_member.first_name, :length => 20)}", member_path(current_member.id)
+        %ul.level-2
+          - if current_user.role == 'admin'
+            %li{:data => {:do => 'toggle', :action => 'view_as_user'}}
+              %input{:type => 'radio', :checked => !current_user.view_as_user}
+              %a{:href=>'#'}= t('view_as_admin')
 
-  %ul#main_menu
-    - tabs.each do |tab|
-      %li{:class=>('active' if params[:controller] == tab[:controller])}
-        %a{:href=>"/#{tab[:url]}"}
-          %i{:class=>tab[:icon]}
-          = t(tab[:name])
+            %li{:data => {:do => 'toggle', :action => 'view_as_user'}}
+              %input{:type => 'radio', :checked => current_user.view_as_user}
+              %a{:href=>'#'}= t('view_as_user')
+
+          %li
+            %a{:href => destroy_user_session_path, :data => {'method' => 'delete'}}
+              %i.icon-remove.icon-white
+              = t('logout')
+
+
+  %ul.main_menu
+    - Menu.published.order('position ASC').each do |item|
+      %li{:class => ('active' if params[:controller] == item.controller)}
+        %a{:href => "/#{item.controller}"}
+          %i{:class => item.icon}
+          = item.name
 
     - if is_admin
       %li
-        %a{:href=>'/admin/surveys'}
-          %i{:class=>'icon-ban-circle icon-white'}
+        %a{:href => admin_surveys_path}
+          %i.icon-ban-circle.icon-white
           = t('admin.admin_panel')
-
-    %li
-      %a{:href=>'/users/sign_out', :data=>{'method' => 'delete'}}
-        %i{:class=>'icon-remove icon-white'}
-        = t(:logout)
 

@@ -1,0 +1,66 @@
+#create_post_modal.modal
+  width: 770px
+  height: 540px
+  max-height: 1000px
+  .modal-body
+    max-height: 900px !important
+    input[type='text']
+      width: 720px
+    .attributes
+      #date_hour, #date_minute
+        width: 60px
+
+.blog > .left
+  width: 580px
+  overflow: auto
+  margin-left: -10px
+  .post
+    clear: both
+    margin-bottom: 50px
+  .has_comments
+    height: 20px
+    padding-left: 20px
+    background: url(asset-path('comments.png', image)) left no-repeat
+  h2
+    font-size: 20px
+    line-height: 20px
+    margin-bottom: 0
+    color: #0088cc
+    a:hover
+      text-decoration: none
+  span.post_attributes
+    border-bottom: 5px solid #d4d4d4
+    margin-bottom: 10px
+    display: block
+    width: 580px
+  .comments
+    margin: 20px 0
+    textarea
+      width: 570px
+      height: 150px
+    .comment
+      clear: both
+      padding: 10px 0
+      .avatar
+        text-align: center
+        width: 55px
+      .date
+        padding-top: 5px
+        padding-left: 5px
+        border-left: 1px solid #d4d4d4
+      p
+        display: block
+        float: left
+        margin-top: 10px
+
+.blog > .right
+  width: 360px
+  margin-right: -5px
+
+ul.archives_month
+  width: 350px
+  li
+    list-style-type: square
+    a
+      font-size: 14px
+
